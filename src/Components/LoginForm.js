@@ -42,7 +42,7 @@ export const LoginForm=()=>{
       setMsg('Adding data to database..')
       console.log(docId)
       try{
-        const docRef = setDoc(doc(db,'users',docId),rem)
+        const docRef = setDoc(doc(db,'users',docId),data)
                         .then(()=>{
                           setOpen(true)
                           setMsg('Added To Database')

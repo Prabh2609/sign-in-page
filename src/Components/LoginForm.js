@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import {Button,Divider, Typography,Box,TextField,Snackbar,Alert,Card, Stack,InputLabel,Select,MenuItem,FormControl } from '@mui/material';
 import { addData,auth,db } from '../Backend/firebase';
 import {createUserWithEmailAndPassword, signInWithEmailAndPassword} from 'firebase/auth'
-import {doc, setDoc } from 'firebase/firestore';
+import {doc, setDoc,serverTimestamp } from 'firebase/firestore';
 import { useHistory } from "react-router";
 
 export const LoginForm=()=>{
@@ -57,6 +57,7 @@ export const LoginForm=()=>{
         createUserWithEmailAndPassword(auth,data.email,data.password)
       .then((cred)=>{
         delete data['password']
+        data.timestamp=serverTimestamp()
         addData(data,cred.user.uid)
       })
       .catch((err)=>{
